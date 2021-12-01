@@ -4,6 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
+
+use App\Console\Offer\JsonReader;
+
 class count_by_vendor_id extends Command
 {
     /**
@@ -37,7 +40,12 @@ class count_by_vendor_id extends Command
      */
     public function handle()
     {
-        $request = Request::create('/vendor', 'GET');
-        $this->info(app()->make(\Illuminate\Contracts\Http\Kernel::class)->handle($request));
+        $id = $this->argument('id');
+        $reader = new JsonReader;
+        $path = storage_path() . "/json/vendor.json"; 
+        $jsondata = $reader->read($path);
+        $this->line('count.vendor_id');
+        $this->line($jsondata->countByVendorID($id));
+        //dd($jsondata);
     }
 }

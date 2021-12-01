@@ -1,8 +1,6 @@
 <?php
-namespace App\Repository;
+namespace App\Console\Offer\Interfaces;
 
-use App\Model\User;
-use Illuminate\Support\Collection;
 /**
  * The interface provides the contract for different readers
  * E.g. it can be XML/JSON Remote Endpoint, or CSV/JSON/XML local files

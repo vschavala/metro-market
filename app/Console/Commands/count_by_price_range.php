@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
+use App\Console\Offer\JsonReader;
 
 class count_by_price_range extends Command
 {
@@ -38,7 +39,14 @@ class count_by_price_range extends Command
      */
     public function handle()
     {
-        $request = Request::create('/price_range', 'GET');
-        $this->info(app()->make(\Illuminate\Contracts\Http\Kernel::class)->handle($request));
+       
+        $reader = new JsonReader;
+        $path = storage_path() . "/json/vendor.json"; 
+        $jsondata = $reader->read($path);
+
+        dd($jsondata);
+
+        // $request = Request::create('/price_range', 'GET');
+        // $this->info(app()->make(\Illuminate\Contracts\Http\Kernel::class)->handle($request));
     }
 }
